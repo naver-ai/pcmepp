@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-827THBTS9H"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-827THBTS9H');
+        </script>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+        <title>Improved Probabilistic Image-Text Representations (PCME++)</title>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="#">PCME++</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="https://github.com/naver-ai/pcmepp">Github</a>
+                    <a class="nav-item nav-link" href="https://arxiv.org/abs/2305.18171">ArXiv</a>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="mx-auto text-center mt-5 mb-3">
+                <h2>Improved Probabilistic Image-Text Representations</h2>
+                <p class="lead"><a href="https://sanghyukchun.github.io/home/">Sanghyuk Chun</a></p>
+                <p class="lead">NAVER AI Lab</p>
+                <p><a href="https://arxiv.org/abs/2305.18171">[paper]</a> <a href="https://github.com/naver-ai/pcmepp">[code]</a></p>
+            </div>
+
+            <div class="row mx-auto text-center mt-5 mb-3">
+                <img style="width: 100%;" src="static/img/intro.png">
+            </div>
+
+            <div class="mx-auto text-center mt-5 mb-5">
+                <h4 class="mb-3">Summary</h4>
+                <ul class="text-justify">
+                    <li>Image-Text Matching (ITM) suffers from the inherent ambiguity caused by multiplicity and imperfect annotations of ITM datasets (See figure).</li>
+                    <li>Probabilistic embeddings can capture the ambiguity of the ITM datasets, but the existing method (Chun, et al. 2021) suffers from expensive computations and loss saturation under abudant false negatives.</li>
+                    <li>PCME++ is an improved probabilistic image-text representation, by introducing: a new closed-form probability distance, named CSD, and a new matching objective function based on CSD for substituting expensive sampling-based approximation of PCME.</li>
+                    <li>There are also two additional techniques for PCME++: Pseudo-positive matches and mixed sample data augmentation for probabilistic match. These techniques addresses the loss saturation issue of abundant false negatives</li>
+                    <li>Experimental results on MS-COCO, CxC and ECCV Caption show the effectiveness of PCME++. Additional experimental results show that the learned uncertainty is helpful for understanding dataset ambiguity. Furthermore, this paper investigates the potential of PCME++ for automatic prompt engineering using the learned text uncertainty.</li>
+                </ul>
+            </div>
+
+            <hr>
+
+            <div class="mx-auto text-center mt-5 mb-3">
+                <h5>Architecture</h5>
+                <img style="width: 100%;" src="static/img/architecture.png">
+            </div>
+
+            <hr>
+
+            <div class="mx-auto text-center mt-5 mb-3">
+                <h5>2D Toy example</h5>
+                <p class="text-justify">Below annimations show the effectiveness of the proposed closed-form sampled distance (CSD) compared to Wasserstein distance. Details of the toy dataset is described in the paper. Here, <span class="text-danger">red</span>, <span class="text-warning">yellow</span> and <span class="text-success">green</span> are "certain" classes, i.e., they should have small uncertainties (smaller radius in the annimation), while the others are "uncertain" samples between two classes. For example, during the training, the samples belonging to the <span style="color: brown">brown</span> class is observed as either <span class="text-danger">red</span> or <span class="text-success">green</span> randomly. It makes the ambiguity of the toy dataset, and our purpose is to design a method that captures the inherent ambiguity of the dataset. Note that the state-of-the-art ITM methods since VSE++ use a triplet loss with "hardest negative mining (HNM)". However, the following annimations show that the negative mining strategy will lead to an unintended embedding space when the dataset is ambiguous. Meanwhile, when there is no negative mining, the method will be failed to distinguish certain and uncertain examples.</p>
+                <div class="row mx-auto text-center mt-5 mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <h5>Triplet loss with hardest negative mining</h5>
+                        <video width="100%" src="static/img/hardest_negative_triplet.mp4" type="video/mp4" autoplay muted loop>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h5>Triplet loss without negative mining</h5>
+                        <video width="100%" src="static/img/sum_triplet.mp4" type="video/mp4" autoplay muted loop>
+                    </div>
+                </div>
+                <p class="text-justify">How about probabilistic approaches? The following annimations show that PCME++ with the proposed CSD will capture the inherent ambiguity of the dataset, i.e., the certain samples have low uncertainty (small radius) and the uncertain samples have high uncertainty (large radius) while the embedding space successfully separates the classes. On the other hand, we can observe that PCME++ with Wasserstein distance is failed to capture the uncertainty of the dataset, i.e., all samples have similar uncertainty. It shows that the proposed CSD is a proper uncertainty-aware probabilistic distance, while Wasserstein distance is not. More detailed discussion can be found in the paper.</p>
+                <div class="row mx-auto text-center mt-5 mb-3">
+                    <div class="col-sm-12 col-md-6">
+                        <h5>PCME++ with the proposed distance (CSD)</h5>
+                        <video width="100%" src="static/img/pcmepp_ours.mp4" type="video/mp4" autoplay muted loop>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <h5>PCME++ with Wasserstein distance (WD)</h5>
+                        <video width="100%" src="static/img/pcmepp_wd.mp4" type="video/mp4" autoplay muted loop>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="mx-auto text-center mt-5 mb-5">
+                <h5>The full experimental results</h5>
+                <p class="text-justify">The full experimental results, including error bars, will be released in google spreadsheet as soon as possible.</p>
+            </div>
+
+            <hr>
+
+            <div class="mx-auto text-center mt-5 mb-3">
+                <h3>Citation</h3>
+            </div>
+            <div class="mb-5" style="background-color: #f7f7f9; padding: 1em;">
+                <pre style="margin: 0;"><code>@article{chun2023pcmepp,
+    title={Improved Probabilistic Image-Text Representations},
+    author={Chun, Sanghyuk},
+    year={2023},
+    journal={arXiv preprint arXiv:2305.18171},
+}</code></pre></div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <!-- mathjax -->
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
