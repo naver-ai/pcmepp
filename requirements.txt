@@ -1,0 +1,16 @@
+lightning==2.0.1
+torch==2.0
+torchtext==0.15.1
+torchvision==0.15.1
+transformers==4.25.1
+fastapi==0.93.0
+pydantic==1.8.2
+fire
+munch
+imageio
+opencv-python
+ftfy
+ujson
+tensorboard
+eccv_caption
+adamp

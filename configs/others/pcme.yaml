@@ -1,0 +1,79 @@
+dataloader:
+    data_name: coco
+    data_path: /path/to/dataset
+    batch_size: 128
+    eval_batch_size: 128
+    workers: 8
+
+model:
+    is_probabilistic_model: true
+    n_unc_layers: 1
+    backbone_source: clip_ViT-B/32
+    precomp_enc_type: backbone
+    embed_size: 1024
+    img_dim: 768
+    no_imgnorm: false
+    no_txtnorm: false
+
+# optimizer configuration
+optim:
+    name: adamp
+    lr: 0.0005
+    wd: 0.0001
+    layerwise_lr_decay: 0.7
+    txt_backbone_lr_decay: 0.1
+    img_backbone_lr_decay: 0.01
+
+# criterion configuration
+criterion:
+    name: pcme
+    init_negative_scale: 5
+    init_shift: 5
+    num_samples: 8
+    vib_beta: 0.001
+    prob_distance: non_squared_l2
+    pdist_fn: iterative
+
+# lr scheduler configuration
+lr_scheduler:
+    - name: ConstantLR
+      factor: 1
+      total_iters: 15
+      milestone: 15
+    - name: ConstantLR
+      factor: 0.1
+      total_iters: 10
+      milestone: 25
+
+augment:
+    mixup: 0
+    cutmix: 0
+    cutmix_minmax: null
+    mixup_prob: 0
+    mixup_switch_prob: 0.5
+    mixup_mode: batch
+    mixup_off_epoch: 0
+    mixup_smoothing: 0.0
+    img_size_augment: 0.2
+    txt_size_augment: 0.2
+    txt_size_augment_masking: 0.5
+    txt_size_augment_erasing: 0.1
+
+validation:
+    num_inference_samples: 8
+
+# detailed training configuration
+train:
+    train_epochs: 25
+    log_step: 100
+    pbar_step: 1450
+    grad_clip: 2
+    linear_warmup: false
+    embedding_warmup_after_freeze: true
+    precision: 32-true
+    torch_compile: max-autotune
+    img_backbone_freeze_epochs: 2
+    txt_backbone_freeze_epochs: 0
+    img_backbone_reinit_layers: 0
+    txt_backbone_reinit_layers: 0
+    embedding_warmup_epochs: 2
