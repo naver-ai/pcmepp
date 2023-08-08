@@ -43,7 +43,7 @@ Step 1. Download COCO 2014 images from the official website: https://cocodataset
     └── val2014   # approximately 40k images are here
 ```
 
-Step 2. Download annotation files from [this link](TBD) and untar the annotations to the dataset path. It will make your dataset file directory will be
+Step 2. Download annotation files from [this link](https://github.com/naver-ai/pcmepp/releases/download/v0.1.0/coco_annotations.tar.gz) and untar the annotations to the dataset path. It will make your dataset file directory will be
 
 ```
 /path/to/dataset
