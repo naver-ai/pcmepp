@@ -118,6 +118,23 @@ We will provide the official weights for each model in the paper.
 }
 ```
 
+I would like to suggest citing [PCME](https://github.com/naver-ai/pcme) and [ECCV Caption](https://github.com/naver-ai/eccv-caption), too.
+```
+@inproceedings{chun2021pcme,
+    title={Probabilistic Embeddings for Cross-Modal Retrieval},
+    author={Chun, Sanghyuk and Oh, Seong Joon and De Rezende, Rafael Sampaio and Kalantidis, Yannis and Larlus, Diane},
+    year={2021},
+    booktitle={Conference on Computer Vision and Pattern Recognition (CVPR)},
+}
+
+@inproceedings{chun2022eccv_caption,
+    title={ECCV Caption: Correcting False Negatives by Collecting Machine-and-Human-verified Image-Caption Associations for MS-COCO}, 
+    author={Chun, Sanghyuk and Kim, Wonjae and Park, Song and Chang, Minsuk Chang and Oh, Seong Joon},
+    year={2022},
+    booktitle={European Conference on Computer Vision (ECCV)},
+}
+```
+
 ## License
 
 ```
