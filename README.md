@@ -1,4 +1,4 @@
-# Improved Probabilistic Image-Text Representations (PCME++)
+# Improved Probabilistic Image-Text Representations (PCME++) (ICLR 2024)
 
 Official Python implementation of PCME++ | [Paper](https://arxiv.org/abs/2305.18171) | [Project page](https://naver-ai.github.io/pcmepp/)
 
@@ -110,11 +110,11 @@ We will provide the official weights for each model in the paper.
 ## How to cite
 
 ```
-@article{chun2023pcmepp,
+@inproceedings{chun2024pcmepp,
     title={Improved Probabilistic Image-Text Representations},
     author={Chun, Sanghyuk},
-    year={2023},
-    journal={arXiv preprint arXiv:2305.18171},
+    year={2024},
+    booktitle={International Conference on Learning Representations (ICLR)},
 }
 ```
 
