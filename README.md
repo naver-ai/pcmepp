@@ -12,6 +12,7 @@ This codebase is built upon the following repositories
 
 ## Updates
 
+- 08 Apr, 2024: HuggingFace model for ImageNet zero-shot is released. See [hf_example.py](https://github.com/naver-ai/pcmepp/blob/main/hf_example.py) for more details
 - 07 Aug, 2023: Code is released!
 
 ## Installation
