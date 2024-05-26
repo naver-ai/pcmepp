@@ -14,8 +14,10 @@ from hf_models import HfPCMEPPModel, tokenize
 
 
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch16")
-model = HfPCMEPPModel.from_pretrained("SanghyukChun/PCMEPP-ViT-B-16-CC3M-12M-RedCaps")
-
+# IN-top1: 34.64%
+# model = HfPCMEPPModel.from_pretrained("SanghyukChun/PCMEPP-ViT-B-16-CC3M-12M-RedCaps")
+# IN-top1: 41.81%
+model = HfPCMEPPModel.from_pretrained("SanghyukChun/PCMEPP-ViT-B-16-CC3M-12M-RedCaps-256M")
 
 url = "http://images.cocodataset.org/val2017/000000039769.jpg"
 image = Image.open(requests.get(url, stream=True).raw)
